@@ -69,9 +69,11 @@ import com.klinker.android.twitter.utils.UpdateUtils;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 
-import go.Go;
-import go.flashlight.Flashlight;
+/*
+//import go.Go;
+//import go.flashlight.Flashlight;
 
+*/
 
 public class MainActivity extends DrawerActivity {
 
@@ -141,10 +143,14 @@ public class MainActivity extends DrawerActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Go.init(getApplicationContext());
+
+        Log.v("DEBUG", "Go.init.");
+
+        //Go.init(getApplicationContext());
 
         try {
-            Flashlight.RunClientProxy("0.0.0.0:9192");
+            Log.v("DEBUG", "Flashlight.RunClientProxy.");
+            //Flashlight.RunClientProxy("0.0.0.0:9192");
         } catch (Exception e) {
             Log.v("ERROR", "Unable to run flashlight! " + e);
             throw new RuntimeException(e);
