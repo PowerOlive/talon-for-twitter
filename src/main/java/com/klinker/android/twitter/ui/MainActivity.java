@@ -69,6 +69,10 @@ import com.klinker.android.twitter.utils.UpdateUtils;
 import java.lang.reflect.Field;
 import java.util.Calendar;
 
+import go.Go;
+import go.flashlight.Flashlight;
+
+
 public class MainActivity extends DrawerActivity {
 
     public static boolean isPopup;
@@ -137,6 +141,14 @@ public class MainActivity extends DrawerActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Go.init(getApplicationContext());
+
+        try {
+            Flashlight.RunClientProxy("0.0.0.0:9192");
+        } catch (Exception e) {
+            Log.v("ERROR", "Unable to run flashlight! " + e);
+            throw new RuntimeException(e);
+        }
 
         UpdateUtils.checkUpdate(this);
 
@@ -147,6 +159,7 @@ public class MainActivity extends DrawerActivity {
         sharedPrefs = context.getSharedPreferences("com.klinker.android.twitter_world_preferences",
                 Context.MODE_WORLD_READABLE + Context.MODE_WORLD_WRITEABLE);
         DrawerActivity.settings = AppSettings.getInstance(context);
+
 
         try {
             requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
